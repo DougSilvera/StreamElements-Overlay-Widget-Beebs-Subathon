@@ -1,0 +1,74 @@
+<!-- Jungle frame container -->
+<div id="jungleFrame">
+  <div class="jungle-layer" id="jungleLayerA"></div>
+  <div class="jungle-layer" id="jungleLayerB"></div>
+</div>
+
+<!-- Right-side stack (timer + milestone as one group) -->
+<div id="rightStack">
+  <!-- Timer -->
+  <div id="timerPane">
+    <div id="timerLabel">SUBATHON ENDS IN</div>
+    <div id="timerCountdown">--:--:--</div>
+  </div>
+
+  <!-- Sub milestone card -->
+  <div id="milestonePane">
+    <div id="milestoneHeader">
+      <span id="milestoneLevel">SEED</span>
+    </div>
+
+    <div id="milestoneTop">
+      <div id="milestoneNext">NEXT LEVEL: SPROUT</div>
+      <div id="milestoneSubs">0 / 5</div>
+    </div>
+
+    <div id="milestoneIncentive">Next unlock: In Game Challenge</div>
+  </div>
+</div>
+
+<!-- Debug HUD (toggleable) -->
+<div id="hud" class="hud hidden">
+  <div id="hudTitle">DEBUG HUD</div>
+
+  <div class="row">
+    <div class="k">hudVisible</div>
+    <div class="v" id="v_hudVisible">-</div>
+  </div>
+  <div class="row">
+    <div class="k">started</div>
+    <div class="v" id="v_started">-</div>
+  </div>
+  <div class="row">
+    <div class="k">upgraded</div>
+    <div class="v" id="v_upgraded">-</div>
+  </div>
+  <div class="row">
+    <div class="k">sessionSubs</div>
+    <div class="v" id="v_subs">-</div>
+  </div>
+
+  <div class="row">
+    <div class="k">startTime</div>
+    <div class="v" id="v_start">-</div>
+  </div>
+  <div class="row">
+    <div class="k">endTime</div>
+    <div class="v" id="v_end">-</div>
+  </div>
+  <div class="row">
+    <div class="k">remaining</div>
+    <div class="v" id="v_remaining">-</div>
+  </div>
+
+  <div class="row">
+    <div class="k">updatedAt</div>
+    <div class="v" id="v_updatedAt">-</div>
+  </div>
+  <div class="row">
+    <div class="k">jungleLevel</div>
+    <div class="v" id="v_jungleLevel">-</div>
+  </div>
+
+  <div id="note">Waiting for chat commands…</div>
+</div>
