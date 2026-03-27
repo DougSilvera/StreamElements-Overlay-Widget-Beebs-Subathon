@@ -1,0 +1,183 @@
+/* =========================
+   RIGHT STACK (TIMER + MILESTONE)
+   ========================= */
+
+#rightStack {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-right: 28px;
+
+  width: 360px;
+  /* single source of truth */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* spacing between timer + milestone */
+
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* =========================
+   TIMER HERO
+   ========================= */
+
+#timerPane {
+  width: 100%;
+  z-index: 20;
+  padding: 22px 22px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  font-family: "Trebuchet MS", "Georgia", serif;
+
+  border-radius: 18px;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.10), transparent 50%),
+    linear-gradient(180deg, rgba(8, 25, 16, 0.85), rgba(5, 14, 9, 0.75));
+
+  border: 2px solid rgba(120, 200, 130, 0.35);
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+
+  backdrop-filter: blur(6px);
+
+  color: rgba(255, 255, 255, 0.95);
+
+  pointer-events: none;
+}
+
+/* header text */
+
+#timerLabel {
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  opacity: 0.95;
+
+  margin-bottom: 10px;
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+/* big hero countdown */
+
+#timerCountdown {
+  font-size: 54px;
+  font-weight: 900;
+
+  font-variant-numeric: tabular-nums;
+
+  line-height: 1;
+
+  text-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.7),
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 14px rgba(80, 255, 180, 0.12);
+
+  color: rgba(255, 245, 220, 0.98);
+}
+
+#timerCountdown {
+  animation: junglePulse 6s ease-in-out infinite;
+}
+
+@keyframes junglePulse {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+  }
+}
+
+/* =========================
+   MILESTONE CARD
+   ========================= */
+
+#milestonePane {
+  width: 100%;
+  padding: 18px 22px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-family: "Trebuchet MS", "Georgia", serif;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.10), transparent 50%),
+    linear-gradient(180deg, rgba(8, 25, 16, 0.85), rgba(5, 14, 9, 0.75));
+
+  border: 2px solid rgba(120, 200, 130, 0.35);
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.95);
+  pointer-events: none;
+  z-index: 20;
+
+  animation: milestonePulseSoft 10s ease-in-out infinite;
+}
+
+@keyframes milestonePulseSoft {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.035);
+  }
+}
+
+#milestoneIncentive {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+
+  color: rgba(235, 255, 235, 0.96);
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.70),
+    0 0 10px rgba(0, 0, 0, 0.28);
+}
+
+#milestoneSubs {
+  font-size: 40px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+
+  color: rgba(255, 245, 220, 0.98);
+
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.7),
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    0 0 14px rgba(80, 255, 180, 0.10);
+}

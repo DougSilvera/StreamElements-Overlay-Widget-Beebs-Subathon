@@ -1,28 +1,27 @@
-# Jungle Subathon Overlay (StreamElements)
+# Subathon Overlay (StreamElements)
 
 A **StreamElements custom widget** for running a subathon with:
 
-- ⏱ **Subathon timer**
-- 🌿 **Jungle growth visual progression**
-- 🎯 **Sub milestone tracker**
-- 🛠 **Moderator control commands**
-- 🔧 **Optional debug HUD**
+-   ⏱ **Dynamic subathon timer (6h → 12h → 24h)**
+-   🎯 **Milestone reward tracker**
+-   📈 **Automatic subscription tracking (subs, resubs, gifts)**
+-   🛠 **Moderator control commands**
+-   🔍 **Built-in event logging for verification/debugging**
 
-The overlay automatically reacts to **subscription events** and updates the jungle progression and milestone tracker.
+This overlay is designed to be **accurate, deterministic, and
+resilient** to StreamElements event quirks.
 
----
+------------------------------------------------------------------------
 
 # Files in This Repository
 
-
-html.html → Widget HTML
-css.css → Widget styles
-js.js → Widget logic
-
+    html.html → Widget HTML
+    css.css   → Widget styles
+    js.js     → Widget logic
 
 These files should be pasted into a **StreamElements Custom Widget**.
 
----
+------------------------------------------------------------------------
 
 # Installation
 
@@ -30,203 +29,156 @@ These files should be pasted into a **StreamElements Custom Widget**.
 
 In StreamElements:
 
+    Dashboard
+    → Streaming Tools
+    → Overlays
+    → New Overlay
 
-Dashboard
-→ Streaming Tools
-→ Overlays
-→ New Overlay
-
-
----
+------------------------------------------------------------------------
 
 ## 2. Add a Custom Widget
 
 Inside the overlay:
 
+    Add Widget
+    → Static / Custom
+    → Custom Widget
 
-Add Widget
-→ Static / Custom
-→ Custom Widget
-
-
----
+------------------------------------------------------------------------
 
 ## 3. Paste the Files
 
 Open the widget editor and paste:
 
-| Widget Tab | File |
-|-------------|------|
-| **HTML** | `html.html` |
-| **CSS** | `css.css` |
-| **JS** | `js.js` |
+  Widget Tab   File
+  ------------ -------------
+  HTML         `html.html`
+  CSS          `css.css`
+  JS           `js.js`
 
 Save the widget.
 
----
+------------------------------------------------------------------------
 
 ## 4. Add Overlay to OBS
 
-Copy the overlay URL from StreamElements and add it as a **Browser Source** in OBS.
+Copy the overlay URL and add it as a **Browser Source** in OBS.
 
----
+------------------------------------------------------------------------
 
-# Subathon Commands (Mods / Broadcaster)
+# Subathon Behavior
 
-These commands are restricted to **moderators and the broadcaster**.
+## Timer Logic
+
+The timer is based on **stream start time**, not incremental extensions.
+
+  Subs      Timer Behavior
+  --------- ------------------------------------
+  `< 5`     Timer hidden (`--:--:--`)
+  `≥ 5`     6-hour countdown becomes visible
+  `≥ 70`    Upgrades to 12-hour total duration
+  `≥ 150`   Upgrades to 24-hour total duration
+
+Important:
+
+-   The timer always counts down from **start time → target duration**
+-   Upgrading tiers **extends the end time if needed**, never shortens
+    it
+-   Timer remains hidden until 5 subs but still runs in the background
+
+------------------------------------------------------------------------
+
+## Milestone Tracker
+
+Displays:
+
+-   Current subs
+-   Next milestone goal
+-   Reward description
+
+Example:
+
+    12 / 15
+    Next unlock: Alien Onesie
+
+------------------------------------------------------------------------
+
+# Subscription Tracking (Important)
+
+The widget handles StreamElements events correctly and avoids common
+pitfalls:
+
+### ✅ Counted
+
+-   New subscriptions → `+1`
+-   Resubscriptions → `+1` (ignores month count)
+-   Direct gifted subs → `+1`
+-   Community gift purchases → `+N` (bundle amount)
+
+### ❌ Ignored
+
+-   Gift recipient follow-up events
+-   `subscriber-latest` events
+-   Duplicate events
+
+------------------------------------------------------------------------
+
+# Moderator Commands
 
 ## Start / Stop
 
-Start a subathon:
-
-
-!subathon start
-
-
-Stop the subathon:
-
-
-!subathon stop
-
-
-Check status:
-
-
-!subathon status
-
-
----
+    !subathon start
+    !subathon stop
+    !subathon status
 
 ## Adjust Subs
 
-Add subs:
+    !subathon +5
+    !subathon -2
 
+## Time Controls
 
-!subathon +5
+    !subathon setstart 19:30
+    !subathon setend 2026-03-04 22:00
 
-
-Remove subs:
-
-
-!subathon -2
-
-
----
-
-## Timer Controls
-
-Set start time:
-
-
-!subathon setstart 19:30
-
-
-Set end time:
-
-
-!subathon setend 2026-03-04 22:00
-
-
-Set duration from start:
-
-
-!subathon setduration 18
-
-
-Set end time relative to now:
-
-
-!subathon setendin 6
-
-
----
-
-# HUD Commands (Debug Panel)
-
-Toggle HUD:
-
-
-!hud
-
-
-Force HUD on:
-
-
-!hud on
-
-
-Force HUD off:
-
-
-!hud off
-
-
-The HUD is **hidden by default**.
-
----
-
-# Jungle Progression
-
-The jungle artwork evolves as subs increase.
-
-| Subs | Level |
-|-----|------|
-| 5 | Seed |
-| 20 | Sprout |
-| 45 | Overgrown |
-| 60 | Wild |
-| 100 | Carnivorous |
-| 200 | Untamed |
-| 250 | Savage |
-
----
+------------------------------------------------------------------------
 
 # Milestone Rewards
 
-| Goal | Reward |
-|-----|------|
-| 5 | In Game Challenge |
-| 20 | Chat Picks Skin |
-| 45 | Chat Picks Dinner |
-| 60 | $$ Customs Tournament |
-| 100 | 24h Unlock + Giveaway |
-| 200 | Pie in the Face |
-| 250 | Momster Tattoo |
+  Goal   Reward
+  ------ ---------------------------
+  5      6 hour stream
+  10     Camera on
+  15     Alien Onesie
+  20     Chamoy Pickle
+  25     Creative Games + Giveaway
+  30     Harmonica Coms
+  50     Bieber Costume
+  55     Bieber Karaoke
+  70     12 Hours unlocked
+  100    Movie night in discord
+  150    24 Hours
+  200    Resident Evil 7
 
----
+------------------------------------------------------------------------
 
-# Automatic Subscription Tracking
+# Debug Logging
 
-The widget automatically increments the sub counter when StreamElements receives:
+The widget includes **console logging for all sub events**:
 
-- New subs
-- Resubs
-- Gifted subs
-- Multi-gifts
+-   Incoming events
+-   Classification (counted / ignored)
+-   Amount applied
 
-Mods **do not need to manually update subs** unless correcting a value.
-
----
-
-# Assets
-
-Jungle artwork is loaded from:
-
-
-assets/
-
-
-in this repository.
-
----
+------------------------------------------------------------------------
 
 # Notes
 
-- Designed for **StreamElements Custom Widgets**
-- Works with **OBS Browser Sources**
-- HUD is intended for **debugging and mod control only**
+-   Built for **StreamElements Custom Widgets**
+-   Designed for **OBS Browser Source usage**
+-   Fully event-driven
 
----
+------------------------------------------------------------------------
 
 # License
 
