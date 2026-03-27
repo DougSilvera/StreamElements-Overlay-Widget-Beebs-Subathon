@@ -103,10 +103,9 @@ Example:
 
 ------------------------------------------------------------------------
 
-# Subscription Tracking (Important)
+# Subscription Tracking
 
-The widget handles StreamElements events correctly and avoids common
-pitfalls:
+The widget handles StreamElements events:
 
 ### ✅ Counted
 
